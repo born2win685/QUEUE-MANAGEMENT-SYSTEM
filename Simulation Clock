@@ -19,7 +19,7 @@ class Simulation:
     def __init__(self):
         self.clock = 0.0  # keeps track of time
         self.no_of_arrivals = 0  # gives the total no of arrivals till now
-        self.time_arrival = 0 #time for next arrival
+        self.time_arrival = gen_int_arr() #time for next arrival
         self.time_leaving_count1 = float('inf')  # time when a customer leaves counter 1
         self.time_leaving_count2 = float('inf')  # time when a customer leaves counter 2
         '''float('inf') is used while assigning to a variable when we have to find the lowest value,intialising it to 0 
