@@ -14,6 +14,6 @@ name_entry=Entry(textvariable=name)
 
 name_entry.place(x=10,y=50)
 
-join=Button(text="JOIN",command=info,bg="black",fg="white"
+join=Button(text="JOIN",command=info,bg="black",fg="white")
 join.place(x=10,y=90)
 screen.mainloop()
