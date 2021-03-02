@@ -1,6 +1,5 @@
 import numpy
 import pandas
-import self as self
 import tkinter
 
 
