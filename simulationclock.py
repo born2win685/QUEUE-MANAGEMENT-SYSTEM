@@ -47,7 +47,7 @@ class Simulation:
     def arrival(self):
         self.no_of_arrivals += 1
         if self.num_in_q == 0:
-            if self.state_count1 == 1 and self.state_count2 == 1:#waits if both tellers are cusy
+            if self.state_count1 == 1 and self.state_count2 == 1:#waits if both tellers are busy
                 self.num_in_q += 1
                 self.totat_cust_in_q += 1
                 self.time_arrival = self.clock + self.gen_int_arr()#generates arrival time
@@ -76,3 +76,26 @@ class Simulation:
                 self.time_leaving_count2 = self.clock + self.dep_2_service
                 self.time_arrival = self.clock + self.gen_int_arr()
                 self.state_count2 =1 
+        
+        
+        elif self.num_in_q < 4 and self.num_in_q >= 1:       #if queue length is less than 4,then the customer is added to queue
+            self.num_in_q+=1
+            self.total_cust_in_q+=1                             
+            self.time_arrival=self.clock + self.gen_int_arr()
+            
+        elif self.num_in_q == 4:                             #since queue length is 4...there's equal probablitity of customer leaving or staying
+            if numpy.random.choice([0,1])==0: 
+                self.num_in_q+=1 
+                self.total_cust_in_q+=1                 
+                self.time_arrival=self.clock + self.gen_int_arr()
+            else:
+                self.lost_customers+=1         #customer leaves :(
+                
+                
+        elif self.num_in_q >= 5:                            #since queue length is greater than 5..there 60 percent probability of customer leaving
+            if numpy.random.choice([0,1],p=[0.4,0.6])==0:
+                self.time_arrival=self.clock+self.gen_int_arr()
+                self.num_in_q+=1 
+                self.total_cust_in_q+=1 
+            else:
+                self.lost_customers+=1
