@@ -44,3 +44,35 @@ class Simulation:
             self.counter1() #if departure time of counter 1 is less than arrival and departure time of counter 2
         else:
             self.counter2() #if departure time of counter 2 is less than arrival and departure time of counter 1
+    def arrival(self):
+        self.no_of_arrivals += 1
+        if self.num_in_q == 0:
+            if self.state_count1 == 1 and self.state_count2 == 1:#waits if both tellers are cusy
+                self.num_in_q += 1
+                self.totat_cust_in_q += 1
+                self.time_arrival = self.clock + self.gen_int_arr()#generates arrival time
+            elif self.state_count1 == 0 and self.state_count2 == 0:
+                if numpy.random.choice([0,1]) == 0:  # choice takes a random number from given list if num is 0 he will go to teller 1 otherwise teller 2
+                    self.state_count1 = 1# 1 implies occupied
+                    self.dep_1_service = self.gen_service_time_teller1()#generates service time for the customer
+                    self.dep_sum_count1 += self.dep_1_service#total service time provided by teller 1 increases by dep_1_service
+                    self.time_leaving_count1 = self.clock + self.dep_1_service
+                    self.time_arrival = self.clock + self.gen_int_arr()#deciding next arrival
+                else:
+                    self.state_count2 = 1 # 1 implies occupied1
+                    self.dep_2_service = self.gen_service_time_teller2()#generates service time for the customer
+                    self.dep_sum_count2 += self.dep_2_service#total service time provided by teller 1 increases by dep_1_service
+                    self.time_leaving_count2 = self.clock + self.dep_2_service
+                    self.time_arrival = self.clock + self.gen_int_arr()#deciding next arrival
+            elif self.state_count1 == 0 and self.state_count2 == 1:
+                self.dep_1_service = self.gen_service_time_teller1()
+                self.dep_sum_count1 += self.dep_1_service
+                self.time_leaving_count1 = self.clock + self.dep_1_service
+                self.time_arrival = self.clock + self.gen_int_arr()
+                self.state_count1 = 1
+            else:
+                self.dep_2_service = self.gen_service_time_teller2()
+                self.dep_sum_count2 += self.dep_2_service
+                self.time_leaving_count2 = self.clock + self.dep_2_service
+                self.time_arrival = self.clock + self.gen_int_arr()
+                self.state_count2 =1 
