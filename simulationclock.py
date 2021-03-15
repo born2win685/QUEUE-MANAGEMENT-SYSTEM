@@ -99,3 +99,23 @@ class Simulation:
                 self.total_cust_in_q+=1 
             else:
                 self.lost_customers+=1
+    def counter1(self):
+        self.num_of_departures1 += 1
+        if self.num_in_q > 0:
+            self.dep_1_service = self.gen_service_time_counter1()
+            self.dep_sum_count1 += self.dep_1_service
+            self.time_leaving_count1 = self.clock + self.dep_1_service
+            self.num_in_q -= 1
+        else:
+            self.time_leaving_count1 = float('inf')
+            self.state_count1 = 0
+    def counter2(self):
+        self.num_of_departures2 += 1
+        if self.num_in_q > 0:
+           self.dep_2_service = self.gen_service_time_counter2()
+            self.dep_sum_count2 +=self.dep_2_service
+            self.time_leaving_count2 = self.clock + self.dep_2_service
+            self.num_in_q -= 1
+        else:
+            self.time_leaving_count2 = float('inf')
+            self.state_count2 = 0 
