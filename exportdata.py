@@ -3,14 +3,14 @@ import pandas as pd
 import queuesimulation as qs
 
 s = qs.Queue()
-s.__init__()
 # making a pandas dataframe to store simulated data
 df = pd.DataFrame(columns=['Average interarrival time', 'Average service time teller1', 'Average service time teller 2',
                            'Utilization teller 1', 'Utilization teller 2', 'People who had to wait in line',
                            'Total average wait time', 'Lost Customers'])
 
-for i in range(2):
+for i in range(10):
     np.random.seed(i)
+    s.__init__()
 
     while s.clock <= 240:
         s.time_routines()
