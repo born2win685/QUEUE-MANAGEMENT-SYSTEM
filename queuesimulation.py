@@ -1,8 +1,10 @@
 import numpy
-
+import GUI_backendinterface as gbi
 def gen_int_arr():
-    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
-
+    if (t==0):
+        return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
+    else:
+        return gbi.s2 - gbi.s1
 
 def gen_service_time_teller1():
     return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 1.2

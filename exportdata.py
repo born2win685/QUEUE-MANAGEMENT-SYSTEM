@@ -1,3 +1,4 @@
+
 import numpy as np
 import pandas as pd
 import queuesimulation as qs
@@ -13,7 +14,8 @@ for i in range(10):
     s.__init__() # we initialize the object each time after we have chosen a seed for random numbers
     print(qs.gen_int_arr())
     while s.clock <= 240: # we are running simulations for a total duration of 4 hrs
-        s.time_routines() # calling time_routines() each time to decide the next event and run the simulation accordingly
+        s.time_routines() # calling time_routines() each time to decide the next event and run the simulation
+        # accordingly
 
     a = pd.Series(
         [s.clock / s.no_of_arrivals, s.dep_sum_time1 / s.num_of_departures1, s.dep_sum_time2 / s.num_of_departures2,
