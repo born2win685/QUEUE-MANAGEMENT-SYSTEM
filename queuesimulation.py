@@ -1,7 +1,4 @@
 import numpy
-import pandas
-import tkinter
-
 
 def gen_int_arr():
     return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
@@ -15,7 +12,7 @@ def gen_service_time_teller2():
     return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 1.5
 
 
-class Simulation:
+class Queue:
     def __init__(self):
         self.clock = 0.0  # keeps track of time
         self.no_of_arrivals = 0  # gives the total no of arrivals till now
