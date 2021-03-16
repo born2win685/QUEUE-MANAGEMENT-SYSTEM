@@ -3,7 +3,7 @@ l=[]
 def info():
     name_info=name.get()
     l.append(name_info)   #list to store the inputs
-    
+    name_entry.delete(0,END)
 screen=Tk()
 screen.title("IIITB BANK")
 head=Label(text="NAME")
