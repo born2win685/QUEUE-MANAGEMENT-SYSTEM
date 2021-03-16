@@ -1,10 +1,11 @@
 from tkinter import *
+l=[]
 def info():
     name_info=name.get()
-    lb=Label(text=name_info).pack()
+    l.append(name_info)   #list to store the inputs
     
 screen=Tk()
-screen.title("IIITB RESTAURANT")
+screen.title("IIITB BANK")
 head=Label(text="NAME")
 head.place(x=10,y=20)
 
