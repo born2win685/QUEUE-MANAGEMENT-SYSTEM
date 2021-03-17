@@ -1,10 +1,11 @@
 import numpy
-import GUI_backendinterface as gbi
+#import GUI_backendinterface as gbi
+
+
 def gen_int_arr():
-    if (t==0):
-        return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
-    else:
-        return gbi.s2 - gbi.s1
+    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
+    #else:
+        #return gbi.s2 - gbi.s1
 
 def gen_service_time_teller1():
     return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 1.2
@@ -35,8 +36,8 @@ class Queue:
 
     def time_routines(self):
         next_event_time = min(self.time_leaving_count1, self.time_leaving_count2,
-                              self.time_arrival)  # calculating the time for the next event
-        self.total_wait_time += (self.num_in_q * (next_event_time - self.clock))  # calculating the total time
+                              self.time_arrival)  # the time at which the next event occurs
+        self.total_wait_time += (self.num_in_q * (next_event_time - self.clock))  # calculating the total wait time
         self.clock = next_event_time  # Clock is set to time of the next event taking place
 
         if self.time_arrival < self.time_leaving_count1 and self.time_arrival < self.time_leaving_count2:

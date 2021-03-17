@@ -13,7 +13,7 @@ for i in range(10):
     np.random.seed(i)
     s.__init__() # we initialize the object each time after we have chosen a seed for random numbers
     print(qs.gen_int_arr())
-    while s.clock <= 240: # we are running simulations for a total duration of 4 hrs
+    while s.total_cust_in_q < 10: # we are running simulations for a total duration of 4 hrs
         s.time_routines() # calling time_routines() each time to decide the next event and run the simulation
         # accordingly
 
