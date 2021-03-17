@@ -134,11 +134,14 @@ q = Queue()
 customers_list =[]
 reciption = Tk()
 reciption.title("Registration")
-
-#backgroung image
-bg = PhotoImage(file = "download.png")
-label1 = Label( reciption, image = bg)
-label1.place(x = 0, y = 0,relwidth=1, relheight=1)
+reciption.geometry("1200x701")
+# #backgroung image
+# bg = PhotoImage(file = "download.png")
+# label1 = Label( reciption, image = bg)
+# label1.place(x = 0, y = 0,relwidth=1, relheight=1)
+filename = PhotoImage(file = "C:\\Users\\SAKETH\\OneDrive\\Desktop\\github\\animated.png")
+background_label = Label(reciption, image=filename)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 #Clock
 def clock():
@@ -148,7 +151,7 @@ def clock():
   am_pm = time.strftime("%p")
   lbl.config(text = hour +":" + minute +":"+second + " "+am_pm)
   lbl.after(1000,clock)
-lbl = Label(reciption,text = "",font = ("Helvetica",48),fg = "red",bg = "black")
+lbl = Label(reciption,text = "",font = ("Helvetica",42),fg = "white",bg = "black")#########here######
 lbl.place(x=0, y=0)
 clock()
 
@@ -161,25 +164,26 @@ def add_customer():
   q.time_routines()
   for_q = Label(reciption, text=str(q.num_in_q))
   for_q.pack()
-  
+
   for_count1 = Label(reciption, text=str(q.state_count1))
   for_count1.place(x=1000,y=1000)
-  
+
   for_count2 = Label(reciption, text=str(q.state_count2))
   for_count2.place(x=1000,y=0)
+
   name_entry.delete(0, END)
 
 
 
-for_entry = Label(reciption, text="For entry")
-for_entry.place(x=400, y=200)
+for_entry = Label(reciption, text="For entry",font = ("Helvetica",22),fg="black")#####here########
+for_entry.place(x=300, y=250)###############here##############
 
 customers_name = StringVar()
 name_entry = Entry(reciption, textvariable=customers_name)
-name_entry.place(x=400, y=220)
+name_entry.place(x=300, y=290)#############here#############
 
 join = Button(text="JOIN", command=add_customer, bg="black", fg="white")
-join.place(x=400, y=250)
+join.place(x=300, y=330)################here################
 
 
 
