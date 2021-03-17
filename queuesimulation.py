@@ -220,9 +220,7 @@ numpy.random.seed(0)
 s = Queue()
  # we initialize the object after we have a random seed
 
-
-<<<<<<< HEAD
-while s.clock < (datetime.datetime.now().minute) : # we are running simulations for 10 customers
+while s.clock < (datetime.datetime.now().minute + 10) : # we are running simulations for 10 customers
     s.time_routines() # calling time_routines() each time to decide the next event and run the simulation accordingly
     print(s.num_in_q)
 
@@ -231,55 +229,12 @@ print("expected waiting time =" + str(s.total_wait_time))
 print("number of customers currently in queue = "+str(s.num_in_q) +"\n")
 
 # take instruction to join queue here
-=======
-customers_list =[]
-reciption = Tk()
-reciption.title("Registration")
-reciption.geometry("1200x701")
-# #backgroung image
-# bg = PhotoImage(file = "download.png")
-# label1 = Label( reciption, image = bg)
-# label1.place(x = 0, y = 0,relwidth=1, relheight=1)
-filename = PhotoImage(file = "C:\\Users\\SAKETH\\OneDrive\\Desktop\\github\\animated.png")
-background_label = Label(reciption, image=filename)
-background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-#Clock
-def clock():
-  hour = time.strftime("%I")
-  minute =time.strftime("%M")
-  second =time.strftime("%S")
-  am_pm = time.strftime("%p")
-  lbl.config(text = hour +":" + minute +":"+second + " "+am_pm)
-  lbl.after(1000,clock)
-lbl = Label(reciption,text = "",font = ("Helvetica",42),fg = "white",bg = "black")#########here######
-lbl.place(x=0, y=0)
-clock()
-
-#entry
-def add_customer():
-  name_var = customers_name.get()
-  customers_list.append(name_var)
-  numpy.random.seed(1)
-  q.__init__()
-  q.time_routines()
-  for_q = Label(reciption, text=str(q.num_in_q))
-  for_q.pack()
-
-  for_count1 = Label(reciption, text=str(q.state_count1))
-  for_count1.place(x=1000,y=1000)
-
-  for_count2 = Label(reciption, text=str(q.state_count2))
-  for_count2.place(x=1000,y=0)
-
-  name_entry.delete(0, END)
->>>>>>> 2409cf2050ff5394e250fc902ae64463537571eb
 
 s.user_time_routines() # should be called when join button is pressed
 
 print("user entered")
 
-<<<<<<< HEAD
 print("number of customers currently in queue = "+str(s.num_in_q) +"\n")
 
 
@@ -287,17 +242,6 @@ a = pd.Series(
         [s.clock / s.no_of_arrivals, s.dep_sum_time1 / s.num_of_departures1, s.dep_sum_time2 / s.num_of_departures2,
          s.total_cust_in_q, s.total_wait_time, s.lost_customers],
         index=df.columns)
-=======
-for_entry = Label(reciption, text="For entry",font = ("Helvetica",22),fg="black")#####here########
-for_entry.place(x=300, y=250)###############here##############
-
-customers_name = StringVar()
-name_entry = Entry(reciption, textvariable=customers_name)
-name_entry.place(x=300, y=290)#############here#############
-
-join = Button(text="JOIN", command=add_customer, bg="black", fg="white")
-join.place(x=300, y=330)################here################
->>>>>>> 2409cf2050ff5394e250fc902ae64463537571eb
 
 # writing the obtained simulated data in a pandas dataframe
 df = df.append(a, ignore_index=True)
