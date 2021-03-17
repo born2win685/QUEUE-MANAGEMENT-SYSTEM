@@ -156,9 +156,17 @@ clock()
 def add_customer():
   name_var = customers_name.get()
   customers_list.append(name_var)
+  numpy.random.seed(1)
+  q.__init__()
   q.time_routines()
   for_q = Label(reciption, text=str(q.num_in_q))
   for_q.pack()
+  
+  for_count1 = Label(reciption, text=str(q.state_count1))
+  for_count1.place(x=1000,y=1000)
+  
+  for_count2 = Label(reciption, text=str(q.state_count2))
+  for_count2.place(x=1000,y=0)
   name_entry.delete(0, END)
 
 
