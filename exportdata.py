@@ -11,8 +11,8 @@ df = pd.DataFrame(columns=['Average interarrival time', 'Average service time te
 for i in range(10):
     np.random.seed(i)
     s.__init__() # we initialize the object each time after we have chosen a seed for random numbers
-    print(qs.gen_int_arr())
-    while s.total_cust_in_q < 10: # we are running simulations for a total duration of 4 hrs
+    #print(qs.gen_int_arr())
+    while s.total_cust_in_q < 10: # we are running simulations for 10 customers
         s.time_routines() # calling time_routines() each time to decide the next event and run the simulation
         # accordingly
 
