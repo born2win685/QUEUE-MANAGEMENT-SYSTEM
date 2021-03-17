@@ -1,0 +1,36 @@
+from tkinter import *
+customers_list =[]
+reciption = Tk()
+reciption.title("Registration")
+
+  #entry
+def add_customer():
+  name_var = customers_name.get()
+  customers_list.append(name_var)
+  t = 1
+  name_entry.delete(0, END)
+
+for_entry = Label(reciption, text="For entry")
+for_entry.place(x=400, y=200)
+
+customers_name = StringVar()
+name_entry = Entry(reciption, textvariable=customers_name)
+name_entry.place(x=400, y=220)
+
+join = Button(text="JOIN", command=add_customer, bg="black", fg="white")
+join.place(x=400, y=250)
+
+  #exit from queue
+def remove_customer():
+  t=1
+  for i in range(0,len(customers_list)):
+        if customers_list[i] == customers_name:
+           customers_list.pop(i)
+           break
+  name_entry.delete(0,END)
+
+leave = Button(text="LEAVE", command=remove_customer, bg="black", fg="white")
+leave.place(x=450, y=250)
+
+reciption.mainloop()
+print(customers_list)
