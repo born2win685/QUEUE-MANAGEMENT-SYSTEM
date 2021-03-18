@@ -252,7 +252,7 @@ def newwindow(mins):
           string= "PM"
       else:
           string= "AM"
-      s.user_time_routines()
+      
       name_var=customers_name.get()
       l4=tk.Label(nw,text="\nNAME: " +  str(name_var)).pack()
       l5=tk.Label(nw,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).pack()
@@ -261,6 +261,7 @@ def newwindow(mins):
       else:
         l6=tk.Label(nw,text="Expected Arrival Time : " + str(newhour) + ":" + str(newminute) + " " + string).pack()  
       b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=destroyer).pack()
+      s.user_time_routines()
 
 l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=110,y=130)
 l3=tk.Label(window,text="\nPlease Enter Your Name: ").place(x=110, y=165)
@@ -269,9 +270,25 @@ name_entry = tk.Entry(window, textvariable=customers_name)
 name_entry.place(x=280, y=180)
 mins=s.total_wait_time
 b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
-l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 16)).place(x=200, y=100)
+l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 16)).place(x=200, y=60)
 
-
+newminute=int((mins))%60
+newhour=int((mins)/60)  
+if int(minute)+newminute>59:
+          newminute=int(minute)+newminute-60
+          newhour=newhour+1
+while(int(hour)+newhour>23):
+          newhour=int(hour)+newhour-24
+if(newhour>11):
+      newhour=newhour-12
+      string= "PM"
+else:
+      string= "AM"
+if(newhour<10):
+        l6=tk.Label(window,text="Expected Arrival Time : " + "0" + str(newhour) + ":" + str(newminute) + " " + string).place(x=110,y=110)
+else:
+        l6=tk.Label(window,text="Expected Arrival Time : " + str(newhour) + ":" + str(newminute) + " " + string).place(x=110,y=110)  
+   
 def cancel_q():
     def exit_queue():
         nww.destroy()
