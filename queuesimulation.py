@@ -10,11 +10,11 @@ def gen_int_arr():
 
 
 def gen_service_time_teller1():
-    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 1.2
+    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 10
 
 
 def gen_service_time_teller2():
-    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 1.5
+    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 10
 
 
 class Queue:
@@ -220,9 +220,9 @@ numpy.random.seed(2)
 s = Queue()
  # we initialize the object after we have a random seed
 
-while s.clock < (240) : # we are running simulations for 10 customers
+while s.clock < (40) : # we are running simulations for 10 customers
     s.time_routines() # calling time_routines() each time to decide the next event and run the simulation accordingly
-   # print(s.num_in_q)
+    #print(s.num_in_q)
 
 
 window=tk.Tk()
