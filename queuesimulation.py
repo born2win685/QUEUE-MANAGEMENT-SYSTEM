@@ -238,6 +238,7 @@ def newwindow(mins):
       global flag
       flag=True
       def destroyer():
+          flag=True
           nw.destroy()
           window.destroy()
           cancel_q()
@@ -245,6 +246,7 @@ def newwindow(mins):
       nw=tk.Toplevel(window)
       newminute=int((mins))%60
       newhour=int((mins)/60)
+
       finalhour=0
       finalminute=0
 
@@ -254,6 +256,8 @@ def newwindow(mins):
       if(k>59):
         finalminute=k-60
         p=p+1
+      else:
+        finalminute=k   
 
       finalhour=p
 
@@ -265,6 +269,8 @@ def newwindow(mins):
         string= "PM"
       else:
         string= "AM"
+    
+      flag=False
       
       name_var=customers_name.get()
       l4=tk.Label(nw,text="\nNAME: " +  str(name_var)).pack()
@@ -281,6 +287,7 @@ def newwindow(mins):
         else:
             l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()  
       b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=destroyer).pack()
+
       s.user_time_routines()
 
 l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=110,y=130)
@@ -292,9 +299,8 @@ mins=s.total_wait_time
 b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
 l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 16)).place(x=200, y=60)
 
-l6=tk.Label(window,text="Expected Arrival Time : " + str(int(mins)) + " mins").place(x=110,y=110)
+l6=tk.Label(window,text="Expected Arrival Time : " + str(int(mins/60)) + ":" + str(int(mins)%60) + " hrs").place(x=110,y=110)
           
-   
 def cancel_q():
     def exit_queue():
         nww.destroy()
@@ -323,6 +329,8 @@ def cancel_q():
     if(k>59):
         finalminute=k-60
         p=p+1
+    else:
+        finalminute=k
 
     finalhour=p
 
@@ -386,9 +394,3 @@ a = pd.Series(
 df = df.append(a, ignore_index=True)
 
 df.to_csv('statistics.csv') # exporting the pandas data workbook to a csv file
-
-
-
-
-
-
