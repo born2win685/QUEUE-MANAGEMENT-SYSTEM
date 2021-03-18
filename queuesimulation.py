@@ -228,8 +228,7 @@ window.geometry("500x500")
 def newwindow():
       
       nw=tk.Toplevel(window)
-      l2=tk.Label(nw,text="expected waiting time =" + str(s.total_wait_time)).pack()
-      l3=tk.Label(nw,text="\nnumber of customers currently in queue = "+str(s.num_in_q)).pack()
+      
       
       s.user_time_routines()
 
@@ -238,6 +237,8 @@ def newwindow():
       b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=nw.destroy).pack()
 
 
+l2=tk.Label(window,text="expected  time =" + str(s.total_wait_time)).place(x=100,y=100)
+l3=tk.Label(window,text="\nnumber of customers currently in queue = "+str(s.num_in_q)).place(x=100,y=130)
 b=tk.Button(text="JOIN THE QUEUE",fg="white",bg="black",command=newwindow).place(x=200,y=220)
 l1=tk.Label(window,text=" WELCOME",font="helvetica,400").pack()
 
