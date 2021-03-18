@@ -244,25 +244,42 @@ def newwindow(mins):
           
       nw=tk.Toplevel(window)
       newminute=int((mins))%60
-      newhour=int((mins)/60)  
-      if int(minute)+newminute>59:
-          newminute=int(minute)+newminute-60
-          newhour=newhour+1
-      while(int(hour)+newhour>23):
-          newhour=int(hour)+newhour-24
-      if(newhour>11):
-          newhour=newhour-12
-          string= "PM"
+      newhour=int((mins)/60)
+      finalhour=0
+      finalminute=0
+
+      k=int(minute)+newminute
+      p=int(hour) + newhour
+
+      if(k>59):
+        finalminute=k-60
+        p=p+1
+
+      finalhour=p
+
+      while(finalhour>23):
+        finalhour=finalhour-24
+        
+      if(finalhour>11):
+        finalhour=finalhour-12
+        string= "PM"
       else:
-          string= "AM"
+        string= "AM"
       
       name_var=customers_name.get()
       l4=tk.Label(nw,text="\nNAME: " +  str(name_var)).pack()
       l5=tk.Label(nw,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).pack()
-      if(newhour<10):
-        l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(newhour) + ":" + str(newminute) + " " + string).pack()
+      if(finalhour<10):
+        if(finalminute<10):
+            l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
+        else:
+            l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
+
       else:
-        l6=tk.Label(nw,text="Expected Arrival Time : " + str(newhour) + ":" + str(newminute) + " " + string).pack()  
+        if(finalminute<10):
+            l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
+        else:
+            l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()  
       b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=destroyer).pack()
       s.user_time_routines()
 
@@ -275,22 +292,8 @@ mins=s.total_wait_time
 b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
 l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 16)).place(x=200, y=60)
 
-newminute=int((mins))%60
-newhour=int((mins)/60)  
-if int(minute)+newminute>59:
-          newminute=int(minute)+newminute-60
-          newhour=newhour+1
-while(int(hour)+newhour>23):
-          newhour=int(hour)+newhour-24
-if(newhour>11):
-      newhour=newhour-12
-      string= "PM"
-else:
-      string= "AM"
-if(newhour<10):
-        l6=tk.Label(window,text="Expected Arrival Time : " + "0" + str(newhour) + ":" + str(newminute) + " " + string).place(x=110,y=110)
-else:
-        l6=tk.Label(window,text="Expected Arrival Time : " + str(newhour) + ":" + str(newminute) + " " + string).place(x=110,y=110)  
+l6=tk.Label(window,text="Expected Arrival Time : " + str(int(mins)) + " mins").place(x=110,y=110)
+          
    
 def cancel_q():
     def exit_queue():
@@ -305,28 +308,47 @@ def cancel_q():
     nww=tk.Tk()
     nww.geometry("300x300")
     nww.title("CANCELLATION")
-    ll1=tk.Label(text="CLICK EXIT TO QUIT FROM THE QUEUE").place(x=20,y=180)
-    bb1=tk.Button(text="EXIT",bg="red",fg="white",command=exit_queue).place(x=100,y=205)
-    ll1=tk.Label(nww,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=30,y=70)
+    ll1=tk.Label(text="CLICK EXIT TO QUIT FROM THE QUEUE").place(x=25,y=180)
+    bb1=tk.Button(text="EXIT",bg="red",fg="white",command=exit_queue).place(x=120,y=205)
+    ll2=tk.Label(nww,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=46,y=70)
+
     newminute=int((mins))%60
-    newhour=int((mins)/60)  
-    if int(minute)+newminute>59:
-          newminute=int(minute)+newminute-60
-          newhour=newhour+1
-    while(int(hour)+newhour>23):
-          newhour=int(hour)+newhour-24
-    if(newhour>11):
-          newhour=newhour-12
-          string= "PM"
-    else:
-          string= "AM"
-    if(newhour<10):
-        l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(newhour) + ":" + str(newminute) + " " + string).place(x=30,y=20)
-    else:
-        l6=tk.Label(nww,text="Expected Arrival Time : " + str(newhour) + ":" + str(newminute) + " " + string).place(x=30,y=20)
+    newhour=int((mins)/60)
+    finalhour=0
+    finalminute=0
 
+    k=int(minute)+newminute
+    p=int(hour) + newhour
 
+    if(k>59):
+        finalminute=k-60
+        p=p+1
+
+    finalhour=p
+
+    while(finalhour>23):
+        finalhour=finalhour-24
+        
+    if(finalhour>11):
+        finalhour=finalhour-12
+        string= "PM"
+    else:
+        string= "AM"
+      
+    name_var=customers_name.get()
+    l4=tk.Label(nww,text="\nNAME: " +  str(name_var)).pack()
+    l5=tk.Label(nww,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).pack()
+    if(finalhour<10):
+        if(finalminute<10):
+            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
+        else:
+            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
     
+    else:
+        if(finalminute<10):
+            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
+        else:
+            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
     
     nww.mainloop()
 
