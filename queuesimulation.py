@@ -9,11 +9,11 @@ def gen_int_arr():
 
 
 def gen_service_time_teller1():
-    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 10
+    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 1.2
 
 
 def gen_service_time_teller2():
-    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 10
+    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 1.5
 
 
 class Queue:
@@ -206,6 +206,9 @@ class Queue:
     def user_arrival_time(self):
         return datetime.datetime.now().minute - self.clock
 
+    def user_exits(self):
+        self.lost_customers += 1
+
 
 # making a pandas dataframe to store simulated data
 df = pd.DataFrame(columns=['Average interarrival time','People who had to wait in line',
@@ -216,7 +219,7 @@ numpy.random.seed(2)
 s = Queue()
  # we initialize the object after we have a random seed
 
-while s.clock < (200) : # we are running simulations for 10 customers
+while s.clock < (240) : # we are running simulations for 10 customers
     s.time_routines() # calling time_routines() each time to decide the next event and run the simulation accordingly
     print(s.num_in_q)
 
