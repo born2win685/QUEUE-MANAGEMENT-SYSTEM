@@ -222,10 +222,11 @@ while s.clock < (200) : # we are running simulations for 10 customers
    # print(s.num_in_q)
 
 
-
 window=tk.Tk()
 window.title("IIITB BANK")
-window.geometry("500x500")
+window.geometry("500x400")
+
+
 
 hour=0
 minute=0
@@ -233,6 +234,11 @@ minute=0
 def newwindow(mins):
       global flag
       flag=True
+      def destroyer():
+          nw.destroy()
+          window.destroy()
+          cancel_q()
+          
       nw=tk.Toplevel(window)
       newminute=int((mins))%60
       newhour=int((mins)/60)  
@@ -254,7 +260,7 @@ def newwindow(mins):
         l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(newhour) + ":" + str(newminute) + " " + string).pack()
       else:
         l6=tk.Label(nw,text="Expected Arrival Time : " + str(newhour) + ":" + str(newminute) + " " + string).pack()  
-      b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=nw.destroy).pack()
+      b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=destroyer).pack()
 
 l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=110,y=130)
 l3=tk.Label(window,text="\nPlease Enter Your Name: ").place(x=110, y=165)
@@ -262,8 +268,48 @@ customers_name = tk.StringVar()
 name_entry = tk.Entry(window, textvariable=customers_name)
 name_entry.place(x=280, y=180)
 mins=s.total_wait_time
-b=tk.Button(text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
+b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
 l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 16)).place(x=200, y=100)
+
+
+def cancel_q():
+    def exit_queue():
+        nww.destroy()
+        quit=tk.Tk()
+        quit.geometry("200x200")
+        quit.title("IIIT BANK")
+        qb1=tk.Button(text="CLOSE",command=quit.destroy).place(x=60,y=100)
+        ql1=tk.Label(text="THANK YOU...VISIT AGAIN!!",bg="green").place(x=10,y=50)
+        #pranav will add backend part here...
+
+    nww=tk.Tk()
+    nww.geometry("300x300")
+    nww.title("CANCELLATION")
+    ll1=tk.Label(text="CLICK EXIT TO QUIT FROM THE QUEUE").place(x=20,y=180)
+    bb1=tk.Button(text="EXIT",bg="red",fg="white",command=exit_queue).place(x=100,y=205)
+    ll1=tk.Label(nww,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=30,y=70)
+    newminute=int((mins))%60
+    newhour=int((mins)/60)  
+    if int(minute)+newminute>59:
+          newminute=int(minute)+newminute-60
+          newhour=newhour+1
+    while(int(hour)+newhour>23):
+          newhour=int(hour)+newhour-24
+    if(newhour>11):
+          newhour=newhour-12
+          string= "PM"
+    else:
+          string= "AM"
+    if(newhour<10):
+        l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(newhour) + ":" + str(newminute) + " " + string).place(x=30,y=20)
+    else:
+        l6=tk.Label(nww,text="Expected Arrival Time : " + str(newhour) + ":" + str(newminute) + " " + string).place(x=30,y=20)
+
+
+    
+    
+    nww.mainloop()
+
 
 
 def clock():
@@ -298,4 +344,9 @@ a = pd.Series(
 df = df.append(a, ignore_index=True)
 
 df.to_csv('statistics.csv') # exporting the pandas data workbook to a csv file
+
+
+
+
+
 
