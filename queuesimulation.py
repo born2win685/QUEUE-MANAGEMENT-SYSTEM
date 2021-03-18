@@ -3,7 +3,9 @@ import tkinter as tk
 import time
 import datetime
 import pandas as pd
+
 flag = False
+
 
 def gen_int_arr():
     return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
@@ -226,10 +228,12 @@ while s.clock < (40) : # we are running simulations for 10 customers
 
 
 window=tk.Tk()
-window.title("IIITB BANK")
+img=tk.PhotoImage(file="animated.png")
+window.title("IIITB QUEUE MANAGEMENT")
 window.geometry("500x400")
 
-
+imglbl= tk.Label(window, image=img)
+imglbl.place(x=-670, y=-180)
 
 hour=0
 minute=0
@@ -260,10 +264,11 @@ def newwindow(mins):
         finalminute=k   
 
       finalhour=p
-
+      print(finalhour)  
       while(finalhour>23):
         finalhour=finalhour-24
-        
+
+      print(finalhour)  
       if(finalhour>11):
         finalhour=finalhour-12
         string= "PM"
@@ -297,7 +302,7 @@ name_entry = tk.Entry(window, textvariable=customers_name)
 name_entry.place(x=280, y=180)
 mins=s.total_wait_time
 b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
-l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 16)).place(x=200, y=60)
+l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 20)).place(x=180, y=60)
 
 l6=tk.Label(window,text="Expected Arrival Time : " + str(int(mins/60)) + ":" + str(int(mins)%60) + " hrs").place(x=110,y=110)
           
@@ -305,18 +310,23 @@ def cancel_q():
     def exit_queue():
         nww.destroy()
         quit=tk.Tk()
-        quit.geometry("200x200")
-        quit.title("IIIT BANK")
-        qb1=tk.Button(text="CLOSE",command=quit.destroy).place(x=60,y=100)
-        ql1=tk.Label(text="THANK YOU...VISIT AGAIN!!",bg="green").place(x=10,y=50)
+        quit.geometry("300x200")
+        quit.title("IIIT QMS")
+        qb1=tk.Button(text="CLOSE",command=quit.destroy).place(x=110,y=100)
+        ql1=tk.Label(text="THANK YOU...PLEASE VISIT AGAIN!!",bg="dark green", fg="white").place(x=30,y=50)
         #pranav will add backend part here...
 
     nww=tk.Tk()
-    nww.geometry("300x300")
+    img1=tk.PhotoImage(file="a.png")
+    nww.geometry("340x340")
     nww.title("CANCELLATION")
-    ll1=tk.Label(text="CLICK EXIT TO QUIT FROM THE QUEUE").place(x=25,y=180)
-    bb1=tk.Button(text="EXIT",bg="red",fg="white",command=exit_queue).place(x=120,y=205)
-    ll2=tk.Label(nww,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=46,y=70)
+
+    imglbl1=tk.Label(nww, image=img1)
+    imglbl1.place(x=0, y=0)
+
+    ll1=tk.Label(text="CLICK EXIT TO QUIT FROM THE QUEUE").place(x=45,y=200)
+    bb1=tk.Button(text="EXIT",bg="red",fg="white",command=exit_queue).place(x=140,y=225)
+    ll2=tk.Label(nww,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=66,y=90)
 
     newminute=int((mins))%60
     newhour=int((mins)/60)
@@ -344,19 +354,19 @@ def cancel_q():
         string= "AM"
       
     name_var=customers_name.get()
-    l4=tk.Label(nww,text="\nNAME: " +  str(name_var)).pack()
-    l5=tk.Label(nww,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).pack()
+    l4=tk.Label(nww,text="\nNAME: " +  str(name_var)).place(x=120, y=45)
+    l5=tk.Label(nww,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).place(x=72, y=85)
     if(finalhour<10):
         if(finalminute<10):
-            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
+            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).place(x=60, y=130)
         else:
-            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
+            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":" + str(finalminute) + " " + string).place(x=60, y=130)
     
     else:
         if(finalminute<10):
-            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
+            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string).place(x=60, y=130)
         else:
-            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
+            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).place(x=60, y=130)
     
     nww.mainloop()
 
@@ -371,9 +381,14 @@ def clock():
   minute =time.strftime("%M")
   second = time.strftime("%S")
   if(int(hour)>11):
-      lbl.config(text = "0" + str(int(hour)-12) +":" + minute + ":" + second + " PM")
+      if(int(hour)-12<10):
+        lbl.config(text ="0" + str(int(hour)-12) +":" + minute + ":" + second + " PM")
+      else:
+        lbl.config(text = str(int(hour)-12) +":" + minute + ":" + second + " PM")
   else:
-      lbl.config(text = "0" + hour +":" + minute + ":" + second + " AM")
+    lbl.config(text =hour +":" + minute + ":" + second + " AM")
+
+
   lbl.after(1000,clock)
 
 lbl = tk.Label(window,text = "",font = ("Times New Roman",16),fg = "red",bg = "white")
