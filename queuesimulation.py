@@ -222,9 +222,6 @@ while s.clock < (200) : # we are running simulations for 10 customers
    # print(s.num_in_q)
 
 
-window=tk.Tk()
-window.title("IIITB BANK")
-window.geometry("500x500")
 
 window=tk.Tk()
 window.title("IIITB BANK")
