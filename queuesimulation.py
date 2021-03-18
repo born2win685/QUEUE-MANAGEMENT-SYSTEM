@@ -4,20 +4,16 @@ import time
 import datetime
 import pandas as pd
 
-t = 0
-
 def gen_int_arr():
-    if (t == 0):
-         return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
-    #else:
-         #return (datetime.datetime.now().minute - s.clock + 2)
+    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
+
 
 def gen_service_time_teller1():
-    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 12
+    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 10
 
 
 def gen_service_time_teller2():
-    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 15
+    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 10
 
 
 class Queue:
@@ -25,7 +21,6 @@ class Queue:
         self.clock = 0.0  # keeps track of time
         self.no_of_arrivals = 0  # gives the total no of arrivals till now
         self.time_arrival = gen_int_arr()  # time for next arrival
-
         self.time_leaving_count1 = float('inf')  # time when a customer leaves counter 1,float('inf') denotes infinity,
         # initially a departure event is scheduled at infinity to ensure first event is arrival'''
         self.time_leaving_count2 = float('inf')  # time when a customer leaves counter 2
@@ -213,14 +208,15 @@ class Queue:
 
 
 # making a pandas dataframe to store simulated data
-df = pd.DataFrame(columns=['Average interarrival time', 'Average service time teller1', 'Average service time teller 2','People who had to wait in line',
+df = pd.DataFrame(columns=['Average interarrival time','People who had to wait in line',
                            'Total average wait time', 'Lost Customers'])
 
-numpy.random.seed(0)
+
+numpy.random.seed(2)
 s = Queue()
  # we initialize the object after we have a random seed
 
-while s.clock < (datetime.datetime.now().minute + 10) : # we are running simulations for 10 customers
+while s.clock < (200) : # we are running simulations for 10 customers
     s.time_routines() # calling time_routines() each time to decide the next event and run the simulation accordingly
     print(s.num_in_q)
 
@@ -235,13 +231,12 @@ s.user_time_routines() # should be called when join button is pressed
 
 print("user entered")
 
-print("number of customers currently in queue = "+str(s.num_in_q) +"\n")
-
+print("number of customers currently in queue = "+str(s.num_in_q) )
 
 a = pd.Series(
-        [s.clock / s.no_of_arrivals, s.dep_sum_time1 / s.num_of_departures1, s.dep_sum_time2 / s.num_of_departures2,
-         s.total_cust_in_q, s.total_wait_time, s.lost_customers],
-        index=df.columns)
+            [s.clock / s.no_of_arrivals,
+             s.total_cust_in_q, s.total_wait_time, s.lost_customers],
+             index=df.columns)
 
 # writing the obtained simulated data in a pandas dataframe
 df = df.append(a, ignore_index=True)
