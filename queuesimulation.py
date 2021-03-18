@@ -3,6 +3,7 @@ import tkinter as tk
 import time
 import datetime
 import pandas as pd
+flag = False
 
 def gen_int_arr():
     return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
@@ -225,22 +226,66 @@ window=tk.Tk()
 window.title("IIITB BANK")
 window.geometry("500x500")
 
-def newwindow():
-      
-      nw=tk.Toplevel(window)
-      
-      
-      s.user_time_routines()
+window=tk.Tk()
+window.title("IIITB BANK")
+window.geometry("500x500")
 
-      l4=tk.Label(nw,text="\nuser entered").pack()
-      l5=tk.Label(nw,text="number of customers currently in queue = "+str(s.num_in_q)).pack()
+hour=0
+minute=0
+
+def newwindow(mins):
+      global flag
+      flag=True
+      nw=tk.Toplevel(window)
+      newminute=int((mins))%60
+      newhour=int((mins)/60)  
+      if int(minute)+newminute>59:
+          newminute=int(minute)+newminute-60
+          newhour=newhour+1
+      while(int(hour)+newhour>23):
+          newhour=int(hour)+newhour-24
+      if(newhour>11):
+          newhour=newhour-12
+          string= "PM"
+      else:
+          string= "AM"
+      s.user_time_routines()
+      name_var=customers_name.get()
+      l4=tk.Label(nw,text="\nNAME: " +  str(name_var)).pack()
+      l5=tk.Label(nw,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).pack()
+      if(newhour<10):
+        l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(newhour) + ":" + str(newminute) + " " + string).pack()
+      else:
+        l6=tk.Label(nw,text="Expected Arrival Time : " + str(newhour) + ":" + str(newminute) + " " + string).pack()  
       b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=nw.destroy).pack()
 
+l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=110,y=130)
+l3=tk.Label(window,text="\nPlease Enter Your Name: ").place(x=110, y=165)
+customers_name = tk.StringVar()
+name_entry = tk.Entry(window, textvariable=customers_name)
+name_entry.place(x=280, y=180)
+mins=s.total_wait_time
+b=tk.Button(text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
+l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 16)).place(x=200, y=100)
 
-l2=tk.Label(window,text="expected  time =" + str(s.total_wait_time)).place(x=100,y=100)
-l3=tk.Label(window,text="\nnumber of customers currently in queue = "+str(s.num_in_q)).place(x=100,y=130)
-b=tk.Button(text="JOIN THE QUEUE",fg="white",bg="black",command=newwindow).place(x=200,y=220)
-l1=tk.Label(window,text=" WELCOME",font="helvetica,400").pack()
+
+def clock():
+  global hour
+  global minute
+  if flag==True:
+      return  
+  hour = time.strftime("%H")
+  minute =time.strftime("%M")
+  second = time.strftime("%S")
+  if(int(hour)>11):
+      lbl.config(text = "0" + str(int(hour)-12) +":" + minute + ":" + second + " PM")
+  else:
+      lbl.config(text = "0" + hour +":" + minute + ":" + second + " AM")
+  lbl.after(1000,clock)
+
+lbl = tk.Label(window,text = "",font = ("Times New Roman",16),fg = "red",bg = "white")
+lbl.place(x=200, y=10)
+clock()
 
 
 
