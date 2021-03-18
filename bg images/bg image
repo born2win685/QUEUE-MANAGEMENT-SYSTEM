@@ -1,1 +1,9 @@
-main.png is for the first window
+#main.png is for the first window
+
+window.geometry("1200x849")
+filename = tk.PhotoImage(file = "main.png")
+background_label = tk.Label(window, image=filename)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+#i added other 3 images in dis folder for the other 3 windows
+#this folder also has a thankyou image in case fif u need
