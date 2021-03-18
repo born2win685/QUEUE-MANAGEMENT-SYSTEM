@@ -1,5 +1,5 @@
 import numpy
-import tkinter
+import tkinter as tk
 import time
 import datetime
 import pandas as pd
@@ -218,20 +218,33 @@ s = Queue()
 
 while s.clock < (200) : # we are running simulations for 10 customers
     s.time_routines() # calling time_routines() each time to decide the next event and run the simulation accordingly
-    print(s.num_in_q)
-
-print("expected waiting time =" + str(s.total_wait_time))
-
-print("number of customers currently in queue = "+str(s.num_in_q) +"\n")
-
-# take instruction to join queue here
+   # print(s.num_in_q)
 
 
-s.user_time_routines() # should be called when join button is pressed
+window=tk.Tk()
+window.title("IIITB BANK")
+window.geometry("500x500")
 
-print("user entered")
+def newwindow():
+      
+      nw=tk.Toplevel(window)
+      l2=tk.Label(nw,text="expected waiting time =" + str(s.total_wait_time)).pack()
+      l3=tk.Label(nw,text="\nnumber of customers currently in queue = "+str(s.num_in_q)).pack()
+      
+      s.user_time_routines()
 
-print("number of customers currently in queue = "+str(s.num_in_q) )
+      l4=tk.Label(nw,text="\nuser entered").pack()
+      l5=tk.Label(nw,text="number of customers currently in queue = "+str(s.num_in_q)).pack()
+      b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=nw.destroy).pack()
+
+
+b=tk.Button(text="JOIN THE QUEUE",fg="white",bg="black",command=newwindow).place(x=200,y=220)
+l1=tk.Label(window,text=" WELCOME",font="helvetica,400").pack()
+
+
+
+
+window.mainloop()
 
 a = pd.Series(
             [s.clock / s.no_of_arrivals,
