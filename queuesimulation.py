@@ -211,6 +211,8 @@ class Queue:
 
     def user_exits(self):
         self.lost_customers += 1
+        self.num_in_q -= 1
+
 
 
 # making a pandas dataframe to store simulated data
@@ -276,10 +278,12 @@ def newwindow(mins):
         string= "AM"
     
       flag=False
-      
+
+      appointment_num = s.no_of_arrivals +1
+
       name_var=customers_name.get()
       l4=tk.Label(nw,text="\nNAME: " +  str(name_var)).pack()
-      l5=tk.Label(nw,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).pack()
+      l5=tk.Label(nw,text="Appointment number: "+str(appointment_num)).pack()
       if(finalhour<10):
         if(finalminute<10):
             l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
@@ -290,10 +294,11 @@ def newwindow(mins):
         if(finalminute<10):
             l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
         else:
-            l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()  
+            l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
       b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=destroyer).pack()
 
       s.user_time_routines()
+      print("user arrival time ="+str(60*s.user_arrival_time()))
 
 l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=110,y=130)
 l3=tk.Label(window,text="\nPlease Enter Your Name: ").place(x=110, y=165)
@@ -355,7 +360,7 @@ def cancel_q():
       
     name_var=customers_name.get()
     l4=tk.Label(nww,text="\nNAME: " +  str(name_var)).place(x=120, y=45)
-    l5=tk.Label(nww,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).place(x=72, y=85)
+    l5=tk.Label(nww,text="APPOINTMENT NUMBER = "+str(s.no_of_arrivals)).place(x=72, y=85)
     if(finalhour<10):
         if(finalminute<10):
             l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).place(x=60, y=130)
