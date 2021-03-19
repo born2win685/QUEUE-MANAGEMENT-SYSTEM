@@ -278,8 +278,8 @@ def newwindow(mins):
       flag=False
       
       name_var=customers_name.get()
-      l4=tk.Label(nw,text="\nNAME: " +  str(name_var)).pack()
-      l5=tk.Label(nw,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).pack()
+      l4=tk.Label(nw,text="\nName: " +  str(name_var)).pack()
+      l5=tk.Label(nw,text="Appointment Number : "+str(s.num_in_q)).pack()
       if(finalhour<10):
         if(finalminute<10):
             l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
@@ -295,7 +295,7 @@ def newwindow(mins):
 
       
 
-l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q),font=("Times New Roman", 12), bg="white").place(x=60,y=320)
+l2=tk.Label(window,text="\nPresent Queue Length : "+str(s.num_in_q),font=("Times New Roman", 12), bg="white").place(x=60,y=320)
 l3=tk.Label(window,text="\nPlease Enter Your Name: ", font=("Times New Roman", 12), bg="white").place(x=20, y=365)
 customers_name = tk.StringVar()
 name_entry = tk.Entry(window, textvariable=customers_name)
@@ -304,7 +304,7 @@ mins=s.total_wait_time
 b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=140,y=420)
 l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 22, 'bold'), bg="white").place(x=90, y=220)
 
-l6=tk.Label(window,text="EXPECTED WAITING TIME : " + str(int(mins/60)) + ":" + str(int(mins)%60) + " hrs", font=("Times New Roman", 12), bg="white").place(x=60,y=300)
+l6=tk.Label(window,text="Expected Waiting Time : " + str(int(mins/60)) + ":" + str(int(mins)%60) + " hrs", font=("Times New Roman", 12), bg="white").place(x=60,y=300)
           
 def cancel_q():
     def exit_queue():
@@ -324,9 +324,9 @@ def cancel_q():
     imglbl1=tk.Label(nww, image=img1)
     imglbl1.place(x=0, y=0)
 
-    ll1=tk.Label(text="CLICK EXIT TO QUIT FROM THE QUEUE").place(x=45,y=200)
+    ll1=tk.Label(text="CLICK EXIT TO QUIT FROM THE QUEUE", font=("Times New Roman", 12), bg="white").place(x=20,y=200)
     bb1=tk.Button(text="EXIT",bg="red",fg="white",command=exit_queue).place(x=140,y=225)
-    ll2=tk.Label(nww,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=66,y=90)
+    ll2=tk.Label(nww,text="\nPresent Queue Length : "+str(s.num_in_q), font=("Times New Roman", 12), bg="white").place(x=80,y=90)
 
     newminute=int((mins))%60
     newhour=int((mins)/60)
@@ -354,19 +354,19 @@ def cancel_q():
         string= "AM"
       
     name_var=customers_name.get()
-    l4=tk.Label(nww,text="\nNAME: " +  str(name_var)).place(x=120, y=45)
-    l5=tk.Label(nww,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).place(x=72, y=85)
+    l4=tk.Label(nww,text="\nName: " +  str(name_var), font=("Times New Roman", 12), bg="white").place(x=120, y=45)
+    l5=tk.Label(nww,text="Appointment Number : "+str(s.num_in_q), font=("Times New Roman", 12), bg="white").place(x=82, y=87)
     if(finalhour<10):
         if(finalminute<10):
-            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).place(x=60, y=130)
+            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string, font=("Times New Roman", 12), bg="white").place(x=60, y=130)
         else:
-            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":" + str(finalminute) + " " + string).place(x=60, y=130)
+            l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":" + str(finalminute) + " " + string, font=("Times New Roman", 12), bg="white").place(x=60, y=130)
     
     else:
         if(finalminute<10):
-            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string).place(x=60, y=130)
+            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string, font=("Times New Roman", 12), bg="white").place(x=60, y=130)
         else:
-            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).place(x=60, y=130)
+            l6=tk.Label(nww,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string, font=("Times New Roman", 12), bg="white").place(x=60, y=130)
     
     nww.mainloop()
 
