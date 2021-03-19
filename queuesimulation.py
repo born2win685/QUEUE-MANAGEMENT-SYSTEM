@@ -269,7 +269,7 @@ def newwindow(mins):
         finalhour=finalhour-24
 
       print(finalhour)  
-      if(finalhour>11):
+      if(finalhour>12):
         finalhour=finalhour-12
         string= "PM"
       else:
@@ -380,7 +380,7 @@ def clock():
   hour = time.strftime("%H")
   minute =time.strftime("%M")
   second = time.strftime("%S")
-  if(int(hour)>11):
+  if(int(hour)>12):
       if(int(hour)-12<10):
         lbl.config(text ="0" + str(int(hour)-12) +":" + minute + ":" + second + " PM")
       else:
