@@ -263,12 +263,10 @@ def newwindow(mins):
       else:
         finalminute=k   
 
-      finalhour=p
-      print(finalhour)  
+      finalhour=p  
       while(finalhour>23):
         finalhour=finalhour-24
-
-      print(finalhour)  
+  
       if(finalhour>12):
         finalhour=finalhour-12
         string= "PM"
