@@ -327,6 +327,7 @@ def cancel_q():
     ll1=tk.Label(text="CLICK EXIT TO QUIT FROM THE QUEUE", font=("Times New Roman", 12), bg="white").place(x=20,y=200)
     bb1=tk.Button(text="EXIT",bg="red",fg="white",command=exit_queue).place(x=140,y=225)
     ll2=tk.Label(nww,text="\nPresent Queue Length : "+str(s.num_in_q), font=("Times New Roman", 12), bg="white").place(x=80,y=90)
+    lbl.after(100,ll2)
 
     newminute=int((mins))%60
     newhour=int((mins)/60)
