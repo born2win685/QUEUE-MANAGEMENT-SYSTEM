@@ -222,7 +222,7 @@ s = Queue()
 # we initialize the object after we have a random seed
 
 while s.clock < (40):  # we are running simulations for 10 customers
-  s.time_routines()  # calling time_routines() each time to decide the next event and run the simulation accordingly
+    s.time_routines()  # calling time_routines() each time to decide the next event and run the simulation accordingly
   # print(s.num_in_q)
 
 window = tk.Tk()
@@ -237,7 +237,7 @@ hour = 0
 minute = 0
 
 
-def newwindow(mins):
+def newwindow(mins,aptno):
   global flag
   s.user_time_routines()
   flag = True
@@ -277,7 +277,7 @@ def newwindow(mins):
 
   name_var = customers_name.get()
   l4 = tk.Label(nw, text="\nName: " + str(name_var)).pack()
-  l5 = tk.Label(nw, text="Appointment Number : " + str(s.num_in_q)).pack()
+  l5 = tk.Label(nw, text="Appointment Number : " + str(aptno)).pack()
   if (finalhour < 10):
     if (finalminute < 10):
       l6 = tk.Label(nw, text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(
@@ -294,6 +294,7 @@ def newwindow(mins):
       l6 = tk.Label(nw, text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
   b2 = tk.Button(nw, text="OK", bg="blue", fg="white", command=destroyer).pack()
 
+aptno = s.no_of_arrivals+1
 
 l2 = tk.Label(window, text="\nPresent Queue Length : " + str(s.num_in_q), font=("Times New Roman", 12),
               bg="white").place(x=60, y=320)
@@ -302,7 +303,7 @@ customers_name = tk.StringVar()
 name_entry = tk.Entry(window, textvariable=customers_name)
 name_entry.place(x=195, y=385)
 mins = s.total_wait_time
-b = tk.Button(window, text="JOIN THE QUEUE", fg="white", bg="black", command=lambda: newwindow(mins)).place(x=140,
+b = tk.Button(window, text="JOIN THE QUEUE", fg="white", bg="black", command=lambda: newwindow(mins,aptno)).place(x=140,
                                                                                                             y=420)
 l1 = tk.Label(window, text=" WELCOME", font=("Times New Roman", 22, 'bold'), bg="white").place(x=90, y=220)
 
@@ -361,7 +362,7 @@ def cancel_q():
 
   name_var = customers_name.get()
   l4 = tk.Label(nww, text="\nName: " + str(name_var), font=("Times New Roman", 12), bg="white").place(x=120, y=45)
-  l5 = tk.Label(nww, text="Appointment Number : " + str(s.num_in_q), font=("Times New Roman", 12), bg="white").place(
+  l5 = tk.Label(nww, text="Appointment Number : " + str(aptno), font=("Times New Roman", 12), bg="white").place(
     x=82, y=87)
   if (finalhour < 10):
     if (finalminute < 10):
