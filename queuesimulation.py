@@ -228,21 +228,21 @@ while s.clock < (40) : # we are running simulations for 10 customers
 
 
 window=tk.Tk()
-img=tk.PhotoImage(file="animated.png")
+img=tk.PhotoImage(file="bckgrd1.png")
 window.title("IIITB QUEUE MANAGEMENT")
-window.geometry("500x400")
+window.geometry("1000x632")
 
 imglbl= tk.Label(window, image=img)
-imglbl.place(x=-670, y=-180)
+imglbl.place(x=0, y=0)
 
 hour=0
 minute=0
 
 def newwindow(mins):
       global flag
+      s.user_time_routines()
       flag=True
       def destroyer():
-          flag=True
           nw.destroy()
           window.destroy()
           cancel_q()
@@ -293,18 +293,18 @@ def newwindow(mins):
             l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()  
       b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=destroyer).pack()
 
-      s.user_time_routines()
+      
 
-l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=110,y=130)
-l3=tk.Label(window,text="\nPlease Enter Your Name: ").place(x=110, y=165)
+l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q),font=("Times New Roman", 12), bg="white").place(x=60,y=320)
+l3=tk.Label(window,text="\nPlease Enter Your Name: ", font=("Times New Roman", 12), bg="white").place(x=20, y=365)
 customers_name = tk.StringVar()
 name_entry = tk.Entry(window, textvariable=customers_name)
-name_entry.place(x=280, y=180)
+name_entry.place(x=195, y=385)
 mins=s.total_wait_time
-b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
-l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 20)).place(x=180, y=60)
+b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=140,y=420)
+l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 22, 'bold'), bg="white").place(x=90, y=220)
 
-l6=tk.Label(window,text="Expected Arrival Time : " + str(int(mins/60)) + ":" + str(int(mins)%60) + " hrs").place(x=110,y=110)
+l6=tk.Label(window,text="EXPECTED WAITING TIME : " + str(int(mins/60)) + ":" + str(int(mins)%60) + " hrs", font=("Times New Roman", 12), bg="white").place(x=60,y=300)
           
 def cancel_q():
     def exit_queue():
@@ -314,7 +314,7 @@ def cancel_q():
         quit.title("IIIT QMS")
         qb1=tk.Button(text="CLOSE",command=quit.destroy).place(x=110,y=100)
         ql1=tk.Label(text="THANK YOU...PLEASE VISIT AGAIN!!",bg="dark green", fg="white").place(x=30,y=50)
-        s.user_exits()
+        #pranav will add backend part here...
 
     nww=tk.Tk()
     img1=tk.PhotoImage(file="a.png")
@@ -347,7 +347,7 @@ def cancel_q():
     while(finalhour>23):
         finalhour=finalhour-24
         
-    if(finalhour>12):
+    if(finalhour>11):
         finalhour=finalhour-12
         string= "PM"
     else:
@@ -380,7 +380,7 @@ def clock():
   hour = time.strftime("%H")
   minute =time.strftime("%M")
   second = time.strftime("%S")
-  if(int(hour)>12):
+  if(int(hour)>11):
       if(int(hour)-12<10):
         lbl.config(text ="0" + str(int(hour)-12) +":" + minute + ":" + second + " PM")
       else:
@@ -391,8 +391,8 @@ def clock():
 
   lbl.after(1000,clock)
 
-lbl = tk.Label(window,text = "",font = ("Times New Roman",16),fg = "red",bg = "white")
-lbl.place(x=200, y=10)
+lbl = tk.Label(window,text = "",font = ("Times New Roman",20),fg = "red",bg = "white")
+lbl.place(x=820, y=25)
 clock()
 
 
