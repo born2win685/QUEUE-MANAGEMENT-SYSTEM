@@ -314,7 +314,7 @@ def cancel_q():
         quit.title("IIIT QMS")
         qb1=tk.Button(text="CLOSE",command=quit.destroy).place(x=110,y=100)
         ql1=tk.Label(text="THANK YOU...PLEASE VISIT AGAIN!!",bg="dark green", fg="white").place(x=30,y=50)
-        #pranav will add backend part here...
+        s.user_exits()
 
     nww=tk.Tk()
     img1=tk.PhotoImage(file="a.png")
