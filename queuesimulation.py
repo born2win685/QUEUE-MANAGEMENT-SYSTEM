@@ -347,7 +347,7 @@ def cancel_q():
     while(finalhour>23):
         finalhour=finalhour-24
         
-    if(finalhour>11):
+    if(finalhour>12):
         finalhour=finalhour-12
         string= "PM"
     else:
