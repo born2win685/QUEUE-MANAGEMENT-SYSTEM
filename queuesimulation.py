@@ -207,7 +207,7 @@ class Queue:
       self.state_count2 = 0
 
   def user_arrival_time(self):
-    return datetime.datetime.now().minute - self.clock
+    return -numpy.log(1 - (numpy.random.uniform(low=0.0, high=1.0))) * 3
 
   def user_exits(self):
     self.lost_customers += 1
@@ -221,7 +221,7 @@ numpy.random.seed(2)
 s = Queue()
 # we initialize the object after we have a random seed
 
-while s.clock < (40):  # we are running simulations for 10 customers
+while s.clock < (40):  # we are running simulations for 40 mins
     s.time_routines()  # calling time_routines() each time to decide the next event and run the simulation accordingly
   # print(s.num_in_q)
 
@@ -319,7 +319,7 @@ def cancel_q():
     quit.title("IIIT QMS")
     qb1 = tk.Button(text="CLOSE", command=quit.destroy).place(x=110, y=100)
     ql1 = tk.Label(text="THANK YOU...PLEASE VISIT AGAIN!!", bg="dark green", fg="white").place(x=30, y=50)
-    # pranav will add backend part here...
+
 
   nww = tk.Tk()
   img1 = tk.PhotoImage(file="a.png")
@@ -333,7 +333,7 @@ def cancel_q():
   bb1 = tk.Button(text="EXIT", bg="red", fg="white", command=exit_queue).place(x=140, y=225)
   ll2 = tk.Label(nww, text="\nPresent Queue Length : " + str(s.num_in_q), font=("Times New Roman", 12),
                  bg="white").place(x=80, y=90)
-  lbl.after(100, ll2)
+  lbl.after(100, ll2) # Checks for value of present queue length and updates it every second
 
   newminute = int((mins)) % 60
   newhour = int((mins) / 60)
