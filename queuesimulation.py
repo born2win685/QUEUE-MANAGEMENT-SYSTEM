@@ -128,7 +128,6 @@ class Queue:
         else:
             self.time_leaving_count2 = float('inf')
             self.state_count2 = 0
-<<<<<<< HEAD
 
     def user_time_routines(self):
         self.time_arrival = self.clock + self.user_arrival_time()
@@ -212,93 +211,6 @@ class Queue:
 
     def user_exits(self):
         self.lost_customers += 1
-=======
-
-    def user_time_routines(self):
-        self.time_arrival = self.clock + self.user_arrival_time()
-        next_event_time = min(self.time_leaving_count1, self.time_leaving_count2,
-                              self.time_arrival)  # the time at which the next event occurs
-        self.total_wait_time += (self.num_in_q * (next_event_time - self.clock))  # calculating the total wait time
-        self.clock = next_event_time  # Clock is set to time of the next event taking place
-
-        if self.time_arrival < self.time_leaving_count1 and self.time_arrival < self.time_leaving_count2:
-            self.user_arrival()  # if arrival time is less than departure from both the counters
-        elif self.time_leaving_count1 < self.time_arrival and self.time_leaving_count1 < self.time_leaving_count2:
-            self.user_counter1dep()  # if departure time of counter 1 is less than arrival and departure time of counter 2
-        else:
-            self.user_counter2dep()  # if departure time of counter 2 is less than arrival and departure time of counter 1
-
-    def user_arrival(self):
-        self.no_of_arrivals += 1
-        if self.num_in_q == 0:
-            if self.state_count1 == 1 and self.state_count2 == 1:  # waits if both tellers are busy
-                self.num_in_q += 1
-                self.total_cust_in_q += 1
-                self.time_arrival = self.clock + self.user_arrival_time()  # generates arrival time
-            elif self.state_count1 == 0 and self.state_count2 == 0:
-                if numpy.random.choice([0,
-                                        1]) == 0:  # choice takes a random number from given list if num is 0 he will go to teller 1 otherwise teller 2
-                    self.state_count1 = 1  # 1 implies occupied
-                    self.dep_1_service = gen_service_time_teller1()  # generates service time for the customer
-                    self.dep_sum_time1 += self.dep_1_service  # total service time provided by teller 1 increases by dep_1_service
-                    self.time_leaving_count1 = self.clock + self.dep_1_service
-                    self.time_arrival = self.clock + self.user_arrival_time()  # deciding next arrival
-                else:
-                    self.state_count2 = 1  # 1 implies occupied1
-                    self.dep_2_service = gen_service_time_teller2()  # generates service time for the customer
-                    self.dep_sum_time2 += self.dep_2_service  # total service time provided by teller 1 increases by dep_1_service
-                    self.time_leaving_count2 = self.clock + self.dep_2_service
-                    self.time_arrival = self.clock + self.user_arrival_time()  # deciding next arrival
-            elif self.state_count1 == 0 and self.state_count2 == 1:
-                self.dep_1_service = gen_service_time_teller1()
-                self.dep_sum_time1 += self.dep_1_service
-                self.time_leaving_count1 = self.clock + self.dep_1_service
-                self.time_arrival = self.clock + self.user_arrival_time()
-                self.state_count1 = 1
-            else:
-                self.dep_2_service = gen_service_time_teller2()
-                self.dep_sum_time2 += self.dep_2_service
-                self.time_leaving_count2 = self.clock + self.dep_2_service
-                self.time_arrival = self.clock + self.user_arrival_time()
-                self.state_count2 = 1
-
-
-        elif self.num_in_q >= 1:  # user is added to queue
-            self.num_in_q += 1
-            self.total_cust_in_q += 1
-            self.time_arrival = self.clock + self.user_arrival_time()
-
-
-    def user_counter1dep(self):
-        self.num_of_departures1 += 1
-        if self.num_in_q > 0:
-            self.dep_1_service = gen_service_time_teller1()
-            self.dep_sum_time1 += self.dep_1_service
-            self.time_leaving_count1 = self.clock + self.dep_1_service
-            self.num_in_q -= 1
-        else:
-            self.time_leaving_count1 = float('inf')
-            self.state_count1 = 0
-
-    def user_counter2dep(self):
-        self.num_of_departures2 += 1
-        if self.num_in_q > 0:
-            self.dep_2_service = gen_service_time_teller2()
-            self.dep_sum_time2 += self.dep_2_service
-            self.time_leaving_count2 = self.clock + self.dep_2_service
-            self.num_in_q -= 1
-        else:
-            self.time_leaving_count2 = float('inf')
-            self.state_count2 = 0
-
-    def user_arrival_time(self):
-        return datetime.datetime.now().minute - self.clock
-
-    def user_exits(self):
-        self.lost_customers += 1
-        self.num_in_q -= 1
-
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
 
 
 # making a pandas dataframe to store simulated data
@@ -309,32 +221,27 @@ df = pd.DataFrame(columns=['Average interarrival time','People who had to wait i
 numpy.random.seed(2)
 s = Queue()
 <<<<<<< HEAD
-<<<<<<< HEAD
  # we initialize the object after we have a random seed
 =======
 # we initialize the object after we have a random seed
-=======
- # we initialize the object after we have a random seed
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
 
-while s.clock < (40) : # we are running simulations for 10 customers
-    s.time_routines() # calling time_routines() each time to decide the next event and run the simulation accordingly
-    #print(s.num_in_q)
+while s.clock < (40):  # we are running simulations for 10 customers
+  s.time_routines()  # calling time_routines() each time to decide the next event and run the simulation accordingly
+  # print(s.num_in_q)
 
-
-window=tk.Tk()
-img=tk.PhotoImage(file="animated.png")
+window = tk.Tk()
+img = tk.PhotoImage(file="bckgrd1.png")
 window.title("IIITB QUEUE MANAGEMENT")
-window.geometry("500x400")
+window.geometry("1000x632")
 
-imglbl= tk.Label(window, image=img)
-imglbl.place(x=-670, y=-180)
+imglbl = tk.Label(window, image=img)
+imglbl.place(x=0, y=0)
 
-hour=0
-minute=0
+hour = 0
+minute = 0
+
 
 def newwindow(mins):
-<<<<<<< HEAD
   global flag
   s.user_time_routines()
   flag = True
@@ -387,37 +294,6 @@ def newwindow(mins):
         finalhour=finalhour-24
 
 <<<<<<< HEAD
-=======
-      global flag
-      flag=True
-      def destroyer():
-          flag=True
-          nw.destroy()
-          window.destroy()
-          cancel_q()
-          
-      nw=tk.Toplevel(window)
-      newminute=int((mins))%60
-      newhour=int((mins)/60)
-
-      finalhour=0
-      finalminute=0
-
-      k=int(minute)+newminute
-      p=int(hour) + newhour
-
-      if(k>59):
-        finalminute=k-60
-        p=p+1
-      else:
-        finalminute=k   
-
-      finalhour=p
-      print(finalhour)  
-      while(finalhour>23):
-        finalhour=finalhour-24
-
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
       print(finalhour)  
       if(finalhour>12):
         finalhour=finalhour-12
@@ -426,25 +302,15 @@ def newwindow(mins):
         string= "AM"
     
       flag=False
-<<<<<<< HEAD
       
       name_var=customers_name.get()
       l4=tk.Label(nw,text="\nNAME: " +  str(name_var)).pack()
       l5=tk.Label(nw,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).pack()
-=======
-
-      appointment_num = s.no_of_arrivals +1
-
-      name_var=customers_name.get()
-      l4=tk.Label(nw,text="\nNAME: " +  str(name_var)).pack()
-      l5=tk.Label(nw,text="Appointment number: "+str(appointment_num)).pack()
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
       if(finalhour<10):
         if(finalminute<10):
             l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
         else:
             l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
-<<<<<<< HEAD
 =======
   name_var = customers_name.get()
   l4 = tk.Label(nw, text="\nName: " + str(name_var)).pack()
@@ -459,14 +325,10 @@ def newwindow(mins):
 >>>>>>> parent of 83b286b (update)
 
 <<<<<<< HEAD
-=======
-
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
       else:
         if(finalminute<10):
             l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
         else:
-<<<<<<< HEAD
             l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()  
       b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=destroyer).pack()
 
@@ -489,15 +351,8 @@ l3=tk.Label(window,text="\nPlease Enter Your Name: ").place(x=110, y=165)
     else:
       l6 = tk.Label(nw, text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
   b2 = tk.Button(nw, text="OK", bg="blue", fg="white", command=destroyer).pack()
-=======
-            l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
-      b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=destroyer).pack()
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
 
-      s.user_time_routines()
-      print("user arrival time ="+str(60*s.user_arrival_time()))
 
-<<<<<<< HEAD
 l2 = tk.Label(window, text="\nPresent Queue Length : " + str(s.num_in_q), font=("Times New Roman", 12),
               bg="white").place(x=60, y=320)
 l3 = tk.Label(window, text="\nPlease Enter Your Name: ", font=("Times New Roman", 12), bg="white").place(x=20, y=365)
@@ -505,17 +360,10 @@ l3 = tk.Label(window, text="\nPlease Enter Your Name: ", font=("Times New Roman"
 customers_name = tk.StringVar()
 name_entry = tk.Entry(window, textvariable=customers_name)
 <<<<<<< HEAD
-=======
-l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=110,y=130)
-l3=tk.Label(window,text="\nPlease Enter Your Name: ").place(x=110, y=165)
-customers_name = tk.StringVar()
-name_entry = tk.Entry(window, textvariable=customers_name)
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
 name_entry.place(x=280, y=180)
 mins=s.total_wait_time
 b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
 l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 20)).place(x=180, y=60)
-<<<<<<< HEAD
 =======
 name_entry.place(x=195, y=385)
 mins = s.total_wait_time
@@ -527,8 +375,6 @@ l6 = tk.Label(window, text="Expected Waiting Time : " + str(int(mins / 60)) + ":
               font=("Times New Roman", 12), bg="white").place(x=60, y=300)
 
 >>>>>>> parent of 83b286b (update)
-=======
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
 
 l6=tk.Label(window,text="Expected Arrival Time : " + str(int(mins/60)) + ":" + str(int(mins)%60) + " hrs").place(x=110,y=110)
           
@@ -571,16 +417,12 @@ def cancel_q():
     finalhour=p
 
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
     while(finalhour>23):
         finalhour=finalhour-24
         
     if(finalhour>12):
         finalhour=finalhour-12
         string= "PM"
-<<<<<<< HEAD
 =======
   if (finalhour > 11):
     finalhour = finalhour - 12
@@ -598,18 +440,12 @@ def cancel_q():
                     text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string,
                     font=("Times New Roman", 12), bg="white").place(x=60, y=130)
 >>>>>>> parent of 83b286b (update)
-=======
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
     else:
         string= "AM"
       
     name_var=customers_name.get()
     l4=tk.Label(nww,text="\nNAME: " +  str(name_var)).place(x=120, y=45)
-<<<<<<< HEAD
     l5=tk.Label(nww,text="APPOINTMENT NUMBER = "+str(s.num_in_q)).place(x=72, y=85)
-=======
-    l5=tk.Label(nww,text="APPOINTMENT NUMBER = "+str(s.no_of_arrivals)).place(x=72, y=85)
->>>>>>> parent of 25655a4 (Merge branch 'main' of https://github.com/born2win685/QUEUE-MANAGEMENT-SYSTEM into main)
     if(finalhour<10):
         if(finalminute<10):
             l6=tk.Label(nww,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).place(x=60, y=130)
