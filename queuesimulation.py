@@ -222,7 +222,32 @@ df = pd.DataFrame(columns=['Average interarrival time','People who had to wait i
 
 numpy.random.seed(2)
 s = Queue()
+<<<<<<< HEAD
  # we initialize the object after we have a random seed
+=======
+# we initialize the object after we have a random seed
+
+while s.clock < (40):  # we are running simulations for 10 customers
+  s.time_routines()  # calling time_routines() each time to decide the next event and run the simulation accordingly
+  # print(s.num_in_q)
+
+window = tk.Tk()
+img = tk.PhotoImage(file="bckgrd1.png")
+window.title("IIITB QUEUE MANAGEMENT")
+window.geometry("1000x632")
+
+imglbl = tk.Label(window, image=img)
+imglbl.place(x=0, y=0)
+
+hour = 0
+minute = 0
+
+
+def newwindow(mins):
+  global flag
+  s.user_time_routines()
+  flag = True
+>>>>>>> parent of 83b286b (update)
 
 while s.clock < (40) : # we are running simulations for 10 customers
     s.time_routines() # calling time_routines() each time to decide the next event and run the simulation accordingly
@@ -270,6 +295,7 @@ def newwindow(mins):
       while(finalhour>23):
         finalhour=finalhour-24
 
+<<<<<<< HEAD
       print(finalhour)  
       if(finalhour>12):
         finalhour=finalhour-12
@@ -289,6 +315,18 @@ def newwindow(mins):
             l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
         else:
             l6=tk.Label(nw,text="Expected Arrival Time : " + "0" + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
+=======
+  name_var = customers_name.get()
+  l4 = tk.Label(nw, text="\nName: " + str(name_var)).pack()
+  l5 = tk.Label(nw, text="Appointment Number : " + str(s.num_in_q)).pack()
+  if (finalhour < 10):
+    if (finalminute < 10):
+      l6 = tk.Label(nw, text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(
+        finalminute) + " " + string).pack()
+    else:
+      l6 = tk.Label(nw, text="Expected Arrival Time : " + "0" + str(finalhour) + ":" + str(
+        finalminute) + " " + string).pack()
+>>>>>>> parent of 83b286b (update)
 
       else:
         if(finalminute<10):
@@ -297,17 +335,32 @@ def newwindow(mins):
             l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
       b2=tk.Button(nw,text="OK",bg="blue",fg="white",command=destroyer).pack()
 
+<<<<<<< HEAD
       s.user_time_routines()
       print("user arrival time ="+str(60*s.user_arrival_time()))
+=======
+>>>>>>> parent of 83b286b (update)
 
 l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=110,y=130)
 l3=tk.Label(window,text="\nPlease Enter Your Name: ").place(x=110, y=165)
 customers_name = tk.StringVar()
 name_entry = tk.Entry(window, textvariable=customers_name)
+<<<<<<< HEAD
 name_entry.place(x=280, y=180)
 mins=s.total_wait_time
 b=tk.Button(window,text="JOIN THE QUEUE",fg="white",bg="black",command=lambda: newwindow(mins)).place(x=200,y=220)
 l1=tk.Label(window,text=" WELCOME",font=("Times New Roman", 20)).place(x=180, y=60)
+=======
+name_entry.place(x=195, y=385)
+mins = s.total_wait_time
+b = tk.Button(window, text="JOIN THE QUEUE", fg="white", bg="black", command=lambda: newwindow(mins)).place(x=140,
+                                                                                                            y=420)
+l1 = tk.Label(window, text=" WELCOME", font=("Times New Roman", 22, 'bold'), bg="white").place(x=90, y=220)
+
+l6 = tk.Label(window, text="Expected Waiting Time : " + str(int(mins / 60)) + ":" + str(int(mins) % 60) + " hrs",
+              font=("Times New Roman", 12), bg="white").place(x=60, y=300)
+
+>>>>>>> parent of 83b286b (update)
 
 l6=tk.Label(window,text="Expected Arrival Time : " + str(int(mins/60)) + ":" + str(int(mins)%60) + " hrs").place(x=110,y=110)
           
@@ -349,12 +402,30 @@ def cancel_q():
 
     finalhour=p
 
+<<<<<<< HEAD
     while(finalhour>23):
         finalhour=finalhour-24
         
     if(finalhour>12):
         finalhour=finalhour-12
         string= "PM"
+=======
+  if (finalhour > 11):
+    finalhour = finalhour - 12
+    string = "PM"
+  else:
+    string = "AM"
+
+  name_var = customers_name.get()
+  l4 = tk.Label(nww, text="\nName: " + str(name_var), font=("Times New Roman", 12), bg="white").place(x=120, y=45)
+  l5 = tk.Label(nww, text="Appointment Number : " + str(s.num_in_q), font=("Times New Roman", 12), bg="white").place(
+    x=82, y=87)
+  if (finalhour < 10):
+    if (finalminute < 10):
+      l6 = tk.Label(nww,
+                    text="Expected Arrival Time : " + "0" + str(finalhour) + ":0" + str(finalminute) + " " + string,
+                    font=("Times New Roman", 12), bg="white").place(x=60, y=130)
+>>>>>>> parent of 83b286b (update)
     else:
         string= "AM"
       
