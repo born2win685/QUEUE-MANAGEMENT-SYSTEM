@@ -324,7 +324,6 @@ def newwindow(mins):
         finalminute) + " " + string).pack()
 >>>>>>> parent of 83b286b (update)
 
-<<<<<<< HEAD
       else:
         if(finalminute<10):
             l6=tk.Label(nw,text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
@@ -343,20 +342,6 @@ def newwindow(mins):
 
 l2=tk.Label(window,text="\nPRESENT QUEUE LENGTH = "+str(s.num_in_q)).place(x=110,y=130)
 l3=tk.Label(window,text="\nPlease Enter Your Name: ").place(x=110, y=165)
-=======
-  else:
-    if (finalminute < 10):
-      l6 = tk.Label(nw,
-                    text="Expected Arrival Time : " + str(finalhour) + ":0" + str(finalminute) + " " + string).pack()
-    else:
-      l6 = tk.Label(nw, text="Expected Arrival Time : " + str(finalhour) + ":" + str(finalminute) + " " + string).pack()
-  b2 = tk.Button(nw, text="OK", bg="blue", fg="white", command=destroyer).pack()
-
-
-l2 = tk.Label(window, text="\nPresent Queue Length : " + str(s.num_in_q), font=("Times New Roman", 12),
-              bg="white").place(x=60, y=320)
-l3 = tk.Label(window, text="\nPlease Enter Your Name: ", font=("Times New Roman", 12), bg="white").place(x=20, y=365)
->>>>>>> parent of 83b286b (update)
 customers_name = tk.StringVar()
 name_entry = tk.Entry(window, textvariable=customers_name)
 <<<<<<< HEAD
