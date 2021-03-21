@@ -1,7 +1,7 @@
 Members:
 
 Saketh
-Sathiya Naarayan
+Sathiya Naraayanan
 Dheeraj Sairam
 Ishaan Jalan
 Pranav Vajreshwari
